@@ -27,19 +27,17 @@ public class CitaMedica {
 	        
 	        this.medico= medObjeto;
 	       
-	        //Tercera edad TE ninio n
+	        //Tercera edad (TE) ninio (n)
 	        if(tipo.equals("TE")) {
 	        	PacienteTerceraEdad pacienteTE = new PacienteTerceraEdad();
 	        	pacienteTE.setCodigoIESS("234234");
 	        
 	        	pacienteTE.setTipo("TE");
-	        	
-	        	
-	        	
+	        	        	
 	        	this.paciente = pacienteTE;
 	        	
 	        	System.out.println("Paciente con Descuento");
-	        } else {
+	        } if (tipo.equals("N")) {
 	        	PacienteNinio pacienteNinio = new PacienteNinio();
 	        	pacienteNinio.setPesoNacimiento("5");
 	        
@@ -47,12 +45,17 @@ public class CitaMedica {
 	        	
 	        	this.paciente = pacienteNinio;
 	        	System.out.println("Paciente sin Descuento");
+	        } else {
+	        	PacienteCancer pc = new  PacienteCancer();
+	        	
+	        	
+	        	
 	        }
+	        	
 	        
 	        this.paciente.setNombre(nombrePaciente);
 	        this.paciente.setCedula(cedulaPaciente);
-	       
-	        
+	  
 	        this.guardarCita(this);
 	        
 	    }
