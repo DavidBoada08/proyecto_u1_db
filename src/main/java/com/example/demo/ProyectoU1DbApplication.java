@@ -1,38 +1,24 @@
 package com.example.demo;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.spring.boot.CitaMedicaSB;
-import com.example.demo.spring.boot.MedicoSB;
-import com.example.demo.spring.boot.PacienteCancerSB;
-import com.example.demo.spring.boot.PacienteTerceraEdadSB;
+import com.example.demo.banco.modelo.CuentaBancaria;
+import com.example.demo.banco.modelo.Transferencia;
+import com.example.demo.banco.service.ICuentaBancariaService;
+import com.example.demo.banco.service.iTransferenciaService;
 
 @SpringBootApplication
-
-//ejecucion mediante consola
 public class ProyectoU1DbApplication implements CommandLineRunner {
 
-	//taler 4
-	
-	//inyeccion de Dependencias DI
 	@Autowired
-	private PacienteTerceraEdadSB pacienteTE;
-	
+	private ICuentaBancariaService bancariaService;
 	@Autowired
-	private PacienteCancerSB pacienteCancerSB;
-	
-	
-	@Autowired
-	private CitaMedicaSB citaMedicaSB;
-	
-	@Autowired
-	private MedicoSB medicoSB;
-	
+	private iTransferenciaService transferenciaService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1DbApplication.class, args);
@@ -40,22 +26,22 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("Spring Boot");
+		CuentaBancaria bancaria1 = new CuentaBancaria();
+		bancaria1.setNumero("0002");
+		bancaria1.setSaldo(new BigDecimal(200));
+		bancaria1.setTipo("A");
+		bancaria1.setTitular("David Boada");
+		this.bancariaService.insertar(bancaria1);
+
+		CuentaBancaria bancaria2 = new CuentaBancaria();
+		bancaria2.setNumero("0023");
+		bancaria2.setSaldo(new BigDecimal(300));
+		bancaria2.setTipo("B");
+		bancaria2.setTitular("Edison Moncayo");
+		this.bancariaService.insertar(bancaria2);
 		
-		this.pacienteTE.setCodigoIESS("123364");
-		this.pacienteTE.setNombre("Edison");
-		this.pacienteTE.setTipo("");
-		this.pacienteTE.setCedula("1720030723");
-		
-		System.out.println(pacienteTE);
-		
-		this.pacienteCancerSB.setCedula("124578963");
-		this.pacienteCancerSB.setNombre("Daniel");
-		this.pacienteCancerSB.setTipo("c");
-		
-		citaMedicaSB.agendar("123123", LocalDateTime.of(2022,12,2,8,30), this.pacienteCancerSB, medicoSB);
-		
+	
+
 	}
 
 }
