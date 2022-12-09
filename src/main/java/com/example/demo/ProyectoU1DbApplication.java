@@ -40,7 +40,18 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 		bancaria2.setTitular("Edison Moncayo");
 		this.bancariaService.insertar(bancaria2);
 		
-	
+		System.out.println("Reporte 1");
+		for(Transferencia t : this.transferenciaService.buscarReporte()) {
+			System.out.println(t);
+		}
+
+		this.transferenciaService.realizar("0002", "0023", new BigDecimal(10));
+		
+		System.out.println("Reporte 2");
+		for(Transferencia t : this.transferenciaService.buscarReporte()) {
+			System.out.println(t);
+		}
+
 
 	}
 

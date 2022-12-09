@@ -52,7 +52,13 @@ public class TransferenciaServiceImpl implements iTransferenciaService {
 		this.bancariaService.actualizar(bancariaDestino);
 		this.transferencia.actualizar(null);
 
-		
+		Transferencia trans = new Transferencia();
+		trans.setCuentaDestino(numDestino);
+		trans.setCuentaOrigen(numOrigen);
+		trans.setFecha(LocalDate.now());
+		trans.setMonto(monto);
+		trans.setNumero("13425");
+		this.transferencia.insertar(trans);
 	}
 
 	@Override
