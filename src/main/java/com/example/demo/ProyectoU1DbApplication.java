@@ -40,6 +40,15 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 		bancaria2.setTitular("Edison Moncayo");
 		this.bancariaService.insertar(bancaria2);
 		
+		System.out.println("Saldo Actual: ");
+		CuentaBancaria cuentaActual1 = this.bancariaService.buscarPorNumero("0001");
+		CuentaBancaria cuentaActual2 = this.bancariaService.buscarPorNumero("0002");
+		
+		System.out.println("Nuevo saldo: "+cuentaActual1.getSaldo());
+		System.out.println("Nuevo saldo: "+cuentaActual2.getSaldo());
+		
+		
+		
 		System.out.println("Reporte 1");
 		for(Transferencia t : this.transferenciaService.buscarReporte()) {
 			System.out.println(t);
@@ -51,6 +60,13 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 		for(Transferencia t : this.transferenciaService.buscarReporte()) {
 			System.out.println(t);
 		}
+		
+		System.out.println("SALDOS NUEVOS: ");
+		CuentaBancaria cuentaConsultada1 = this.bancariaService.buscarPorNumero("0001");
+		CuentaBancaria cuentaConsultada2 = this.bancariaService.buscarPorNumero("0002");
+		
+		System.out.println("Nuevo saldo: "+cuentaConsultada1.getSaldo());
+		System.out.println("Nuevo saldo: "+cuentaConsultada2.getSaldo());
 
 
 	}
