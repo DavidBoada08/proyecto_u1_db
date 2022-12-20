@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,60 +7,53 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.ejercicio1.modelo.Propietario;
-import com.example.demo.ejercicio1.modelo.Vehiculo;
-import com.example.demo.ejercicio1.service.IMatriculaService;
-import com.example.demo.ejercicio1.service.IPropietarioService;
-import com.example.demo.ejercicio1.service.IVehiculoService;
+
+import com.example.demo.cita.modelo.Doctor;
+import com.example.demo.cita.modelo.Paciente;
+import com.example.demo.cita.service.ICitaMedicaService;
+import com.example.demo.cita.service.IDoctorService;
+import com.example.demo.cita.service.IPacienteSevice;
 
 @SpringBootApplication
 public class ProyectoU1DbApplication implements CommandLineRunner {
 
 	@Autowired
-	private IVehiculoService iVehiculoService;
+	private IDoctorService doctorService;
 	
 	@Autowired
-	private IPropietarioService iPropietarioService;
+	private IPacienteSevice iPacienteSevice ;
 	
 	@Autowired
-	private IMatriculaService iMatriculaService;
-	
+	private ICitaMedicaService citaMedicaService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1DbApplication.class, args);
-	
-	
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("SPRING BOOT");
 		
-		//Opcion 1
-		Vehiculo vehi = new Vehiculo();
-		vehi.setMarca("Toyta");
-		vehi.setPlaca("PDF12654");
-		vehi.setPrecio(new BigDecimal(20000));
-		vehi.setTipo("P");
-		this.iVehiculoService.crear(vehi);
-		//Es una opcion
-		vehi.setPrecio(new BigDecimal(10000));
-		vehi.setMarca("Toyota");
-		this.iVehiculoService.modificar(vehi);
+		Doctor doctor = new Doctor();
+		doctor.setApellido("Ruiz");
+		doctor.setCedula("1720030723");
+		doctor.setNombre("Clare");
 		
-		//Opcion 2
+		this.doctorService.agregar(doctor);
+		
+		Paciente paciente = new Paciente() ;
+		paciente.setApellido("Boada");
+		paciente.setCedula("1723116974");
+		paciente.setNombre("David");
+		
+		this.iPacienteSevice.agregar(paciente);
+		
+		this.citaMedicaService.Agendar("1720030723", "1723116974", LocalDateTime.of(1991, 7, 5, 15, 18));
 		
 		
-		Propietario propietario = new Propietario();
-		propietario.setApellido("Colon");
-		propietario.setCedula("154774566");
-		propietario.setFechaNacimiento(LocalDateTime.of(1978, 8,31,12,35));
-		propietario.setNombre("Edison");
-		 this.iPropietarioService.guardar(propietario);
 		
-		//Opcion 3
-		 this.iMatriculaService.matricular("15774566", "PDF12654");
+		
+		
+		
 		
 	}
 		
