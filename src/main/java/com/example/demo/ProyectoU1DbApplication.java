@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.ejercicio1.modelo.Propietario;
 import com.example.demo.ejercicio1.modelo.Vehiculo;
+import com.example.demo.ejercicio1.service.IMatriculaNuevaService;
 import com.example.demo.ejercicio1.service.IMatriculaService;
 import com.example.demo.ejercicio1.service.IPropietarioService;
 import com.example.demo.ejercicio1.service.IVehiculoService;
@@ -25,6 +27,12 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 	
 	@Autowired
 	private IMatriculaService iMatriculaService;
+	
+	@Autowired
+	@Qualifier("liviano")
+	private IMatriculaNuevaService iMatriculaNuevaService;
+	
+	
 	
 	
 	public static void main(String[] args) {
@@ -61,7 +69,7 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 		 this.iPropietarioService.guardar(propietario);
 		
 		//Opcion 3
-		 this.iMatriculaService.matricular("15774566", "PDF12654");
+		 this.iMatriculaNuevaService.matricular("15774566", "PDF12654");
 		
 	}
 		
