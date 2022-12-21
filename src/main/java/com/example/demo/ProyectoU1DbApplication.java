@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.ejercicio1.modelo.Propietario;
 import com.example.demo.ejercicio1.modelo.Vehiculo;
+import com.example.demo.ejercicio1.service.IGestorMatriculaService;
 import com.example.demo.ejercicio1.service.IMatriculaNuevaService;
 import com.example.demo.ejercicio1.service.IMatriculaService;
 import com.example.demo.ejercicio1.service.IPropietarioService;
@@ -19,6 +20,13 @@ import com.example.demo.ejercicio1.service.IVehiculoService;
 @SpringBootApplication
 public class ProyectoU1DbApplication implements CommandLineRunner {
 
+	/*@Autowired
+	private ICuentaBancariaService bancariaService;
+	
+	@Qualifier("grande")
+	@Autowired
+	private ITransferenciaService iTransferenciaService;
+	*/
 	@Autowired
 	private IVehiculoService iVehiculoService;
 	
@@ -26,14 +34,17 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 	private IPropietarioService iPropietarioService;
 	
 	@Autowired
-	private IMatriculaService iMatriculaService;
+	private IGestorMatriculaService gestorMatriculaService;
+	
+	
+	@Autowired
+	@Qualifier("pesado")
+	private IMatriculaNuevaService iMatriculaService;
+	
 	
 	@Autowired
 	@Qualifier("liviano")
-	private IMatriculaNuevaService iMatriculaNuevaService;
-	
-	
-	
+	private IMatriculaNuevaService iMatriculaServiceLiviano;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU1DbApplication.class, args);
@@ -51,7 +62,7 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 		vehi.setMarca("Toyta");
 		vehi.setPlaca("PDF12654");
 		vehi.setPrecio(new BigDecimal(20000));
-		vehi.setTipo("P");
+		vehi.setTipo("L");
 		this.iVehiculoService.crear(vehi);
 		//Es una opcion
 		vehi.setPrecio(new BigDecimal(10000));
@@ -67,11 +78,17 @@ public class ProyectoU1DbApplication implements CommandLineRunner {
 		propietario.setFechaNacimiento(LocalDateTime.of(1978, 8,31,12,35));
 		propietario.setNombre("Edison");
 		 this.iPropietarioService.guardar(propietario);
+		 
+		 
+		 //Logica de negocio no puede estar aqui
+	
+		this.gestorMatriculaService.matricular("154774566", "PDF12654");
 		
-		//Opcion 3
-		 this.iMatriculaNuevaService.matricular("15774566", "PDF12654");
+		
+		
 		
 	}
+
 		
 
 }
